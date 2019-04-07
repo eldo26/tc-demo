@@ -1,12 +1,10 @@
-docker run -d --name teamcity-server-instance -p 8111:8111 -v /data/teamcity_server:/data/teamcity_server/datadir jetbrains/teamcity-server
-docker run --name mysql-server -p 3306:3306 -e MYSQL_ROOT_PASSWORD=root -d mysql 
+docker run -d --name teamcity-server --restart=always -p 8111:8111 -v /data/teamcity_server:/data/teamcity_server/datadir jetbrains/teamcity-server
+docker run --name mysql-server -v /data/mysql/data:/var/lib/mysql --restart=always -p 3306:3306 -e MYSQL_ROOT_PASSWORD=root -d mysql 
 
+mysql> create database tc;
 mysql> create user 'tc2'@'172.17.0.1' identified by 'tc2';
-Query OK, 0 rows affected (0.01 sec)
-
 mysql> grant all on tc.* to 'tc2'@'172.17.0.1';
-Query OK, 0 rows affected (0.00 sec)
 
 
-docker run -d -e SERVER_URL="10.160.0.17:8111" --name=teamcity-agent -v /data/tc-agent:/data/teamcity_agent/conf jetbrains/teamcity-agent
-docker run -d -e SERVER_URL="10.160.0.17:8111" --name=teamcity-agent -e AGENT_NAME="$hostname" -v /data/tc-agent:/data/teamcity_agent/conf jetbrains/teamcity-agent
+
+docker run -d -e SERVER_URL="10.160.0.17:8111" --restart=always --name=teamcity-agent -e AGENT_NAME="agent1" -v /data/tc-agent:/data/teamcity_agent/conf jetbrains/teamcity-agent
