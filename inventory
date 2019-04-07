@@ -1,0 +1,8 @@
+kube-nodes-1 ansible_ssh_host=35.200.191.115
+kube-nodes-2 ansible_ssh_host=35.244.24.187
+
+[master]
+kube-nodes-1
+
+[agents]
+kube-nodes-2
