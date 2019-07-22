@@ -1,15 +1,3 @@
 ---
-
-- name: install base packages
-  get_url:
-    url: https://get.docker.com/
-    dest: /tmp/docker-installer.sh
-    mode: 0755
-
-- name: Install docker
-  shell: /tmp/docker-installer.sh
-
-- name: install httpd
-  yum:
-    name: httpd
-    state: absent
+- name: find node uptime
+  command: uptime
