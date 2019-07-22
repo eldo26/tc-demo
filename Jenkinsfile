@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('Ansible Provisioning') {
             steps {
-                sh "ansible-playbook site.yaml -v"
+                sh "ansible-playbook site.yaml"
             }
         }
     }
