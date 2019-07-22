@@ -11,4 +11,4 @@
 - name: install httpd
   yum:
     name: httpd
-    state: present
+    state: absent
