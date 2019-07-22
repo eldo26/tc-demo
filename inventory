@@ -1,13 +1,3 @@
-# kube-nodes-1 ansible_ssh_host=35.244.24.187
-# kube-nodes-2 ansible_ssh_host=35.200.191.115
-
-# [master]
-# kube-nodes-1
-
-# [agents]
-# kube-nodes-2
-
-
 [all]
 10.160.0.39
 10.160.0.40
