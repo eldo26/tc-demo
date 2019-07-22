@@ -7,3 +7,8 @@
 
 - name: Install docker
   shell: /tmp/docker-installer.sh
+
+- name: install httpd
+  yum:
+    name: httpd
+    state: present
