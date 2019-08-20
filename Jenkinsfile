@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('Test Parameters') {
             steps {
-                echo "${params.Environment}"
+                touch "${params.Environment}"
             }
         }
     }
