@@ -1,2 +1,3 @@
 #!/usr/bin/env python
-print("Hello")
+import os 
+os.system('touch newfile.txt')
