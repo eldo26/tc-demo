@@ -4,6 +4,7 @@ pipeline {
         stage('Test Parameters') {
             steps {
                 touch "${params.Environment}"
+		echo "helloon"
             }
         }
     }
