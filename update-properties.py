@@ -51,20 +51,22 @@ def write_to_vault(data, app_environment, application_name, vault_password):
     vault.dump_raw(data, open('{}/{}.properties'.format(app_environment, application_name), 'w'))
 
 parser = argparse.ArgumentParser(description="Script can be used to add/update/remove properities defined under ds-private")
-restricted_operations = parser.add_mutually_exclusive_group()
-restricted_operations.add_argument("-add",     "-a",  help="Add properities")
-restricted_operations.add_argument("-update",  "-u",  help="Update properities", nargs=2)
-restricted_operations.add_argument("-remove",  "-r",  help="Remove properities")
-parser.add_argument("-environment",    "-e",   help='select Environment', required=True)
-parser.add_argument("-application",  "-app",   help='select Application', required=True)
-parser.add_argument("-user",           "-U",   help='select user', required=True)
+parser.add_argument("-action",  "-a",  help="add/update/remove properities", required=True)
+parser.add_argument("-environment",    "-e",   help='select Environment',    required=True)
+parser.add_argument("-application",  "-app",   help='select Application',    required=True)
+parser.add_argument("-user",           "-u",   help='select user',           required=True)
+parser.add_argument("-vaultpassword", "-v",   help='Ansible Vault Password', required=True)
+parser.add_argument("-property",       "-p", help='Property name and value', required=True)
 args = parser.parse_args()
 
-vault_password = getpass.getpass("\n\tEnter vault password:  ")
+vault_password = args.vaultpassword
+action = args.action
+property_name = args.property
 
-if args.add:
-    add_properties(args.add, args.environment, args.application, vault_password, args.user)
-elif args.update:
-    update_properties(args.update[0], args.update[1], args.environment, args.application, vault_password, args.user)
+
+if action == 'add':
+    add_properties(property_name, args.environment, args.application, vault_password, args.user)
+elif action == 'update':
+    update_properties(property_name, args.environment, args.application, vault_password, args.user)
 else:
-    remove_properties(args.remove, args.environment, args.application, vault_password, args.user)
+    remove_properties(property_name, args.environment, args.application, vault_password, args.user)
