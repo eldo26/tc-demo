@@ -1,9 +1,9 @@
 pipeline {
     agent any
     stages {
-        stage('Ansible Provisioning') {
+        stage('Test Parameters') {
             steps {
-                echo "hello"
+                echo "${params.Environment}"
             }
         }
     }
