@@ -1,3 +1,0 @@
----
-- name: find node uptime
-  command: uptime
